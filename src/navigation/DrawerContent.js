@@ -33,7 +33,7 @@ export default function DrawerContent(props) {
             uri:
               'https://avatars2.githubusercontent.com/u/66664769?s=460&u=ff1c38651cf52f31324bf9bcf9e69e20c40a0012&v=4',
           }}
-          size={50}
+          size={60}
         />
         <Title style={styles.title}>Joshua A. Díaz Robayna</Title>
         <Caption style={styles.caption}>@jadrdev</Caption>
