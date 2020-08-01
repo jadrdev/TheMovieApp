@@ -3,7 +3,17 @@
 import React, {useState} from 'react';
 import {StyleSheet, View} from 'react-native';
 import {DrawerContentScrollView} from '@react-navigation/drawer';
-import {Drawer, Switch, TouchableRipple, Text} from 'react-native-paper';
+import {
+  useTheme,
+  Avatar,
+  Title,
+  Caption,
+  Paragraph,
+  Drawer,
+  Text,
+  TouchableRipple,
+  Switch,
+} from 'react-native-paper';
 
 export default function DrawerContent(props) {
   const {navigation} = props;
@@ -16,6 +26,32 @@ export default function DrawerContent(props) {
 
   return (
     <DrawerContentScrollView>
+      <View style={styles.drawerContent} />
+      <View style={styles.userInfoSection}>
+        <Avatar.Image
+          source={{
+            uri:
+              'https://avatars2.githubusercontent.com/u/66664769?s=460&u=ff1c38651cf52f31324bf9bcf9e69e20c40a0012&v=4',
+          }}
+          size={50}
+        />
+        <Title style={styles.title}>Joshua A. Díaz Robayna</Title>
+        <Caption style={styles.caption}>@jadrdev</Caption>
+        <View style={styles.row}>
+          <View style={styles.section}>
+            <Paragraph style={[styles.paragraph, styles.caption]}>
+              202
+            </Paragraph>
+            <Caption style={styles.caption}>Seguidos</Caption>
+          </View>
+          <View style={styles.section}>
+            <Paragraph style={[styles.paragraph, styles.caption]}>
+              159
+            </Paragraph>
+            <Caption style={styles.caption}>Seguidores</Caption>
+          </View>
+        </View>
+      </View>
       <Drawer.Section>
         <Drawer.Item
           label="Inicio"
@@ -37,4 +73,42 @@ export default function DrawerContent(props) {
   );
 }
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  drawerContent: {
+    flex: 1,
+  },
+  userInfoSection: {
+    paddingLeft: 20,
+  },
+  title: {
+    marginTop: 20,
+    fontWeight: 'bold',
+  },
+  caption: {
+    fontSize: 14,
+    lineHeight: 14,
+  },
+  row: {
+    marginTop: 20,
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  section: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginRight: 15,
+  },
+  paragraph: {
+    fontWeight: 'bold',
+    marginRight: 3,
+  },
+  drawerSection: {
+    marginTop: 15,
+  },
+  preference: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    paddingVertical: 12,
+    paddingHorizontal: 16,
+  },
+});
