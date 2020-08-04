@@ -15,9 +15,12 @@ import {
   Switch,
 } from 'react-native-paper';
 
+import usePreference from '../hooks/usePreferences';
+
 export default function DrawerContent(props) {
   const {navigation} = props;
   const [Active, setActive] = useState('home');
+  const {theme, toggleTheme} = usePreference();
 
   const onChangeScreen = (screen) => {
     setActive(screen);
@@ -69,6 +72,17 @@ export default function DrawerContent(props) {
           onPress={() => onChangeScreen('news')}
         />
       </Drawer.Section>
+      <Drawer.Section title="Ajustes">
+        <TouchableRipple>
+          <View style={styles.preference}>
+            <Text>Tema Oscuro</Text>
+            <Switch
+              value={theme === 'dark' ? true : false}
+              onValueChange={toggleTheme}
+            />
+          </View>
+        </TouchableRipple>
+      </Drawer.Section>
     </DrawerContentScrollView>
   );
 }
@@ -110,5 +124,6 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     paddingVertical: 12,
     paddingHorizontal: 16,
+    alignItems: 'center',
   },
 });
