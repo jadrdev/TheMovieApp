@@ -13,3 +13,32 @@ export function getNewsMoviesApi(page = 1) {
       return result;
     });
 }
+
+export function getGenreMoviesApi(idGenres) {
+  const url = `${API_HOST}/genre/movie/list?api_key=${API_KEY}&language=${API_LANG}`;
+
+  return fetch(url) // Extraemos en formato JSON todas las peliculas a través de la promesa
+    .then((response) => {
+      return response.json();
+    })
+    .then((result) => {
+      const arrayGenres = [];
+      idGenres.forEach((id) => {
+        result.genres.forEach((item) => {
+          if (item.id === id) arrayGenres.push(item.name);
+        });
+      });
+      return arrayGenres;
+    });
+}
+
+export function getAllGenreApi() {
+  const url = `${API_HOST}/genre/movie/list?api_key=${API_KEY}&language=${API_LANG}`;
+  return fetch(url) // Extraemos en formato JSON todas las peliculas a través de la promesa
+    .then((response) => {
+      return response.json();
+    })
+    .then((result) => {
+      return result;
+    });
+}

@@ -4,33 +4,55 @@ import Carousel from 'react-native-snap-carousel';
 import {TouchableWithoutFeedback} from 'react-native-gesture-handler';
 import {Text, Title} from 'react-native-paper';
 import {BASE_PATH} from '../utils/constants';
+import {getGenreMoviesApi} from '../api/movies';
+import {map, size} from 'lodash';
 
 const {width} = Dimensions.get('window');
 const ITEM_WIDTH = Math.round(width * 0.7);
 
 export default function CarruselVertical(props) {
-  const {data} = props;
+  const {data, navigation} = props;
 
   return (
     <Carousel
       layout={'default'}
       data={data}
-      renderItem={(item) => <RenderItem data={item} />}
+      renderItem={(item) => <RenderItem data={item} navigation={navigation} />}
       sliderWidth={width}
       itemWidth={ITEM_WIDTH}
     />
   );
 
   function RenderItem(props) {
-    const {data} = props;
-    const {title, poster_path} = data.item;
+    const {data, navigation} = props;
+    const {id, title, poster_path, genre_ids} = data.item;
     const imageURL = `${BASE_PATH}/w500/${poster_path}`;
+    const [genres, setGenres] = useState(null);
+
+    useEffect(() => {
+      getGenreMoviesApi(genre_ids).then((response) => {
+        setGenres(response);
+      });
+    }, []);
+
+    const onNavigation = () => {
+      navigation.navigate('movie', {id});
+    };
 
     return (
-      <TouchableWithoutFeedback onPress={() => console.log('Hola')}>
+      <TouchableWithoutFeedback onPress={onNavigation}>
         <View style={styles.card}>
           <Image style={styles.image} source={{uri: imageURL}} />
           <Text style={styles.title}>{title}</Text>
+          <View style={styles.genre}>
+            {genres &&
+              map(genres, (genre, index) => (
+                <Text key={index} style={styles.genres}>
+                  {genre}
+                  {index !== size(genres) - 1 && ', '}
+                </Text>
+              ))}
+          </View>
         </View>
       </TouchableWithoutFeedback>
     );
@@ -55,5 +77,13 @@ const styles = StyleSheet.create({
   title: {
     marginTop: 10,
     marginHorizontal: 10,
+  },
+  genre: {
+    flexDirection: 'row',
+    marginHorizontal: 10,
+  },
+  genres: {
+    fontSize: 12,
+    color: '#8997a5',
   },
 });
