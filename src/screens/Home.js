@@ -46,10 +46,10 @@ export default function Home(props) {
           {map(genreList, (genre) => (
             <Text
               key={genre.id}
-              style={
-                (styles.genred,
-                {color: genre.id !== genreSelected ? '#8697a5' : '#fff'})
-              }>
+              style={[
+                styles.genred,
+                {color: genre.id !== genreSelected ? '#8697a5' : '#fff'},
+              ]}>
               {genre.name}
             </Text>
           ))}
