@@ -48,7 +48,7 @@ export default function Home(props) {
               key={genre.id}
               style={[
                 styles.genred,
-                {color: genre.id !== genreSelected ? '#8697a5' : '#fff'},
+                {color: genre.id !== genreSelected ? '#8697a5' : '#ffff'},
               ]}>
               {genre.name}
             </Text>
