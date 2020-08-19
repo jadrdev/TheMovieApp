@@ -13,6 +13,9 @@ import {
 import Navigation from './src/navigation/Navigation';
 import PreferencesContext from './src/context/PreferencesContext';
 
+console.disableYellowBox = true;
+// Quitamos WARNING de las App
+
 export default function App() {
   const [theme, setTheme] = useState('dark');
 
