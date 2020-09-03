@@ -42,3 +42,14 @@ export function getAllGenreApi() {
       return result;
     });
 }
+
+export function getGenreMovieApi(idGenres) {
+  const url = `${API_HOST}/discover/movie?api_key=${API_KEY}&with_genres=${idGenres}&language=${API_LANG}`;
+  return fetch(url) // Extraemos en formato JSON todas las peliculas a través de la promesa
+    .then((response) => {
+      return response.json();
+    })
+    .then((result) => {
+      return result;
+    });
+}

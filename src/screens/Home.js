@@ -1,15 +1,29 @@
 import React, {useState, useEffect} from 'react';
 import {View, Text, StyleSheet, ScrollView} from 'react-native';
-import {getNewsMoviesApi, getAllGenreApi} from '../api/movies';
+import {
+  getNewsMoviesApi,
+  getAllGenreApi,
+  getGenreMovieApi,
+} from '../api/movies';
 import {Title} from 'react-native-paper';
 import CarruselVertical from '../components/CarruselVertical';
 import {map} from 'lodash';
+import CarruselMulti from '../components/CarruselMulti';
 
 export default function Home(props) {
   const {navigation} = props;
   const [newMovies, setNewMovies] = useState(null);
   const [genreList, setgenreList] = useState([]);
   const [genreSelected, setgenreSelected] = useState(28);
+  const [genreMovies, setgenreMovies] = useState(null);
+
+  // UseEffect se utiliza cuando se monta y desmonta el componente
+
+  useEffect(() => {
+    getGenreMovieApi(genreSelected).then((response) => {
+      setgenreMovies(response.results);
+    });
+  }, [genreSelected]);
 
   useEffect(() => {
     getNewsMoviesApi().then((response) => {
@@ -55,6 +69,9 @@ export default function Home(props) {
             </Text>
           ))}
         </ScrollView>
+        {genreMovies && (
+          <CarruselMulti data={genreMovies} navigation={navigation} />
+        )}
       </View>
     </ScrollView>
   );
