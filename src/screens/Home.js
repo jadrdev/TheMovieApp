@@ -62,7 +62,7 @@ export default function Home(props) {
               key={genre.id}
               style={[
                 styles.genred,
-                {color: genre.id !== genreSelected ? '#8697a5' : '#ffff'},
+                {color: genre.id !== genreSelected ? '#8697a5' : '#ffffff'},
               ]}
               onPress={() => onChangeGenre(genre.id)}>
               {genre.name}
