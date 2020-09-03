@@ -9,7 +9,7 @@ export default function Home(props) {
   const {navigation} = props;
   const [newMovies, setNewMovies] = useState(null);
   const [genreList, setgenreList] = useState([]);
-  const [genreSelected, setgenreSelected] = useState();
+  const [genreSelected, setgenreSelected] = useState(28);
 
   useEffect(() => {
     getNewsMoviesApi().then((response) => {
@@ -49,7 +49,8 @@ export default function Home(props) {
               style={[
                 styles.genred,
                 {color: genre.id !== genreSelected ? '#8697a5' : '#ffff'},
-              ]}>
+              ]}
+              onPress={() => onChangeGenre(genre.id)}>
               {genre.name}
             </Text>
           ))}
