@@ -12,22 +12,28 @@ export default function Movie(props) {
     getMoviesByIDApi(id).then((response) => {
       setmovie(response);
     });
-  }, []);
+  }, [id]);
+
+  if (!movie) return null;
+  // Se quita el error de movie = null
 
   return (
     <>
-      <ScrollView></ScrollView>
+      <ScrollView showsVerticalScrollIndicator={false}>
+        <MovieImage posterPath={movie.poster_path} />
+      </ScrollView>
     </>
   );
 }
 
 function MovieImage(props) {
-  const {poster_path} = props;
+  const {posterPath} = props;
+
   return (
     <View style={styles.viewPoster}>
       <Image
         style={styles.poster}
-        source={{uri: `${BASE_PATH_IMG}/w500${poster_path}`}}
+        source={{uri: `${BASE_PATH_IMG}/w500${posterPath}`}}
       />
     </View>
   );
@@ -38,14 +44,14 @@ const styles = StyleSheet.create({
     shadowColor: '#000',
     shadowOffset: {
       width: 0,
-      height: 100,
+      height: 10,
     },
     shadowOpacity: 1,
     textShadowRadius: 10,
   },
   poster: {
     width: '100%',
-    height: 50,
+    height: 550,
     borderBottomLeftRadius: 30,
     borderBottomRightRadius: 30,
   },
