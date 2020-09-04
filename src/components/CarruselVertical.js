@@ -3,7 +3,7 @@ import {StyleSheet, View, Image, Dimensions} from 'react-native';
 import Carousel from 'react-native-snap-carousel';
 import {TouchableWithoutFeedback} from 'react-native-gesture-handler';
 import {Text, Title} from 'react-native-paper';
-import {BASE_PATH} from '../utils/constants';
+import {BASE_PATH_IMG} from '../utils/constants';
 import {getGenreMoviesApi} from '../api/movies';
 import {map, size} from 'lodash';
 
@@ -26,7 +26,7 @@ export default function CarruselVertical(props) {
   function RenderItem(props) {
     const {data, navigation} = props;
     const {id, title, poster_path, genre_ids} = data.item;
-    const imageURL = `${BASE_PATH}/w500/${poster_path}`;
+    const imageURL = `${BASE_PATH_IMG}/w500/${poster_path}`;
     const [genres, setGenres] = useState(null);
 
     useEffect(() => {

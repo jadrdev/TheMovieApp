@@ -53,3 +53,14 @@ export function getGenreMovieApi(idGenres) {
       return result;
     });
 }
+
+export function getMoviesByIDApi(idMovie) {
+  const url = `${API_HOST}/movie/${idMovie}?api_key=${API_KEY}&language=${API_LANG}`;
+  return fetch(url) // Extraemos en formato JSON todas las peliculas a través de la promesa
+    .then((response) => {
+      return response.json();
+    })
+    .then((result) => {
+      return result;
+    });
+}
