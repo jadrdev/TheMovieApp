@@ -59,6 +59,16 @@ function MovieTrailer(props) {
   );
 }
 
+function MovieTitle(props) {
+  const {movie} = props;
+
+  return (
+    <View style={styles.viewInfo}>
+      <Title></Title>
+    </View>
+  );
+}
+
 const styles = StyleSheet.create({
   viewPoster: {
     shadowColor: '#000',
@@ -86,5 +96,8 @@ const styles = StyleSheet.create({
     width: 60,
     height: 60,
     borderRadius: 100,
+  },
+  viewInfo: {
+    marginHorizontal: 30,
   },
 });
