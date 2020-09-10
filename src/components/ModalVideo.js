@@ -6,17 +6,24 @@ import {getVideoMovieApi} from '../api/movies';
 
 export default function ModalVideo(props) {
   const {show, setShow, idMovie} = props;
-  const [video, setvideo] = useState(null);
+  const [video, setVideo] = useState(null);
+  console.log(video);
 
   useEffect(() => {
     getVideoMovieApi(idMovie).then((response) => {
-      console.log(response);
+      let idVideo = null;
+      response.results.forEach((video) => {
+        if (video.site === 'YouTube' && !idVideo) {
+          idVideo = video.key;
+        }
+      });
+      setVideo(idVideo);
     });
   }, []);
 
   return (
     <Modal visible={show} contentContainerStyle={styles.modal}>
-      <Title>Hola</Title>
+      <YouTube videoId={video} style={styles.video} />
       <IconButton
         icon="close"
         onPress={() => setShow(false)}
@@ -39,5 +46,9 @@ const styles = StyleSheet.create({
     borderRadius: 100,
     position: 'absolute',
     bottom: 100,
+  },
+  video: {
+    alignSelf: 'stretch',
+    height: 300,
   },
 });
