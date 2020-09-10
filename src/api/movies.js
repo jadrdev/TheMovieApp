@@ -64,3 +64,14 @@ export function getMoviesByIDApi(idMovie) {
       return result;
     });
 }
+
+export function getVideoMovieApi(idMovie) {
+  const url = `${API_HOST}/movie/${idMovie}/videos?api_key=${API_KEY}&language=${API_LANG}`;
+  return fetch(url) // Extraemos en formato JSON todas las peliculas a través de la promesa
+    .then((response) => {
+      return response.json();
+    })
+    .then((result) => {
+      return result;
+    });
+}
