@@ -75,3 +75,14 @@ export function getVideoMovieApi(idMovie) {
       return result;
     });
 }
+
+export function getPopularMovieApi(page = 1) {
+  const url = `${API_HOST}/movie/popular?api_key=${API_KEY}&language=${API_LANG}&page=${page}`;
+  return fetch(url) // Extraemos en formato JSON todas las peliculas a través de la promesa
+    .then((response) => {
+      return response.json();
+    })
+    .then((result) => {
+      return result;
+    });
+}

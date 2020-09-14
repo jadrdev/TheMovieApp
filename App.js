@@ -1,5 +1,5 @@
 import React, {useMemo, useState} from 'react';
-import {StatusBar} from 'react-native';
+import {StatusBar, LogBox} from 'react-native';
 import {
   Provider as PaperProvider,
   DarkTheme as DarkThemePaper,
@@ -13,7 +13,7 @@ import {
 import Navigation from './src/navigation/Navigation';
 import PreferencesContext from './src/context/PreferencesContext';
 
-console.disableYellowBox = true;
+LogBox.ignoreAllLogs();
 // Quitamos WARNING de las App
 
 export default function App() {

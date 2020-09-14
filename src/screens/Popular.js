@@ -1,10 +1,26 @@
-import React from 'react';
-import {View, Text} from 'react-native';
+import React, {useState, useEffect} from 'react';
+import {View, StyleSheet, ScrollView} from 'react-native';
+import {Text} from 'react-native-paper';
+import {map} from 'lodash';
+import {getPopularMovieApi} from '../api/movies';
 
-export default function Popular() {
+export default function Popular(props) {
+  const {navigation} = props;
+  const [movies, setMovies] = useState(null);
+
+  useEffect(() => {
+    getPopularMovieApi(1).then((response) => {
+      setMovies(response.results);
+    });
+  }, []);
+
+  return <ScrollView></ScrollView>;
+}
+
+function Movie() {
   return (
     <View>
-      <Text>Hola Popular</Text>
+      <Text>Hola</Text>
     </View>
   );
 }
