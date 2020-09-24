@@ -14,7 +14,13 @@ export default function Popular(props) {
     });
   }, []);
 
-  return <ScrollView></ScrollView>;
+  return (
+    <ScrollView>
+      {map(movies, (movie, index) => {
+        <Movie key={index} movie={movie} />;
+      })}
+    </ScrollView>
+  );
 }
 
 function Movie() {
