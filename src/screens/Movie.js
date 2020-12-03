@@ -23,7 +23,7 @@ export default function Movie(props) {
   }, [id]);
 
   if (!movie) return null;
-  // Se quita el error de movie =
+  // Se quita el error de movie = a vacio
 
   return (
     <>
